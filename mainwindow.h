@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <regex>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,5 +27,6 @@ private:
     Ui::MainWindow *ui;
     void AddToken( int c, QString *temp, int i, QString tokenType);
     QString TypeOfToken(QString temp);
+    std::vector<std::string> tokenize(const std::string str,const std::regex re);
 };
 #endif // MAINWINDOW_H
