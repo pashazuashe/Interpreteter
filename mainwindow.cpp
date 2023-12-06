@@ -73,19 +73,19 @@ void MainWindow::on_pushButton_analyze_clicked()
 //    QMap<int, QString> map;
 
     QTableWidget *tableLexems = ui->tableWidget_Lexems_Data;
-//    QString temp;
+    QString temp;
     int c = 0;
 
 
-    const std::regex re(R"([\s|,|;|(|)|+|-|:=|*|/]+)");
-    const std::vector<std::string> tokenized =
-        tokenize(stdSourceCode, re);
+//    const std::regex re(R"([\s|,|;|(|)|+|-|:=|*|/]+)");
+//    const std::vector<std::string> tokenized =
+//        tokenize(stdSourceCode, re);
 
-    for (std::string token : tokenized){
-        c++;
-        QString temp = QString::fromUtf8(token.c_str());
-        AddToken(c, &temp, c, TypeOfToken(temp));
-    }
+//    for (std::string token : tokenized){
+//        c++;
+//        QString temp = QString::fromUtf8(token.c_str());
+//        AddToken(c, &temp, c, TypeOfToken(temp));
+//    }
 //        std::cout << token << std::endl;
 
 //    for (auto i = 0; i < sourceCode.length(); i++){
@@ -104,34 +104,34 @@ void MainWindow::on_pushButton_analyze_clicked()
 //        }
 //    }
 
-//    for (auto i = 0; i < sourceCode.length(); i++){ // добавить токены в таблицу значений
-//        if (sourceCode[i] == QChar(59)){
-//            if (temp.length() > 0){
-//                AddToken(c, &temp, i - temp.length(), TypeOfToken(temp));
-//                c++;
-//                temp.clear();
-//            }
-//            QString tempChar(";");
-//            AddToken(c, &tempChar, i, TypeOfToken(tempChar));
-//            c++;
-//            temp.clear();
-//            continue;
-//        }
-//        if ((sourceCode[i] == QChar(32) || sourceCode[i] == QChar(10)) && temp.length() > 0){
-//            AddToken(c, &temp, i - temp.length(), TypeOfToken(temp));
-//            c++;
-//            temp.clear();
-//            continue;
-//        }
-//        temp.append(sourceCode[i]);
-//        temp.remove(QChar(32));
-//        temp.remove(QChar(10));
-//        if (i == sourceCode.length()-1 && temp.length() > 0 && temp != " "){
-//            AddToken(c, &temp, sourceCode.length() - 1, TypeOfToken(temp));
-//        }
+    for (auto i = 0; i < sourceCode.length(); i++){ // добавить токены в таблицу значений
+        if (sourceCode[i] == QChar(59)){
+            if (temp.length() > 0){
+                AddToken(c, &temp, i - temp.length(), TypeOfToken(temp));
+                c++;
+                temp.clear();
+            }
+            QString tempChar(";");
+            AddToken(c, &tempChar, i, TypeOfToken(tempChar));
+            c++;
+            temp.clear();
+            continue;
+        }
+        if ((sourceCode[i] == QChar(32) || sourceCode[i] == QChar(10)) && temp.length() > 0){
+            AddToken(c, &temp, i - temp.length(), TypeOfToken(temp));
+            c++;
+            temp.clear();
+            continue;
+        }
+        temp.append(sourceCode[i]);
+        temp.remove(QChar(32));
+        temp.remove(QChar(10));
+        if (i == sourceCode.length()-1 && temp.length() > 0 && temp != " "){
+            AddToken(c, &temp, sourceCode.length() - 1, TypeOfToken(temp));
+        }
     }
 
-
+}
 
 void MainWindow::AddToken( int c, QString *temp, int i, QString tokenType){
     QTableWidget *tableLexems = ui->tableWidget_Lexems_Data;
